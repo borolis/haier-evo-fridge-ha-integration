@@ -1,0 +1,15 @@
+{
+  "domain": "haier_evo_fridge",
+  "name": "Haier EVO Fridge",
+  "codeowners": ["@borolis"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/borolis/haier-evo-fridge-ha-integration",
+  "homekit": {},
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/borolis/haier-evo-fridge-ha-integration/issues",
+  "requirements": [],
+  "ssdp": [],
+  "version": "1.0.0",
+  "zeroconf": []
+}

@@ -1,0 +1,13 @@
+attributes:
+  - name: fridge_temperature
+    id: "3"
+  - name: freezer_temperature
+    id: "4"
+  - name: door_state
+    id: "10"
+  - name: vacation_mode
+    id: "8"
+  - name: super_cool
+    id: "6"
+  - name: super_freeze
+    id: "7"
