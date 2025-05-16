@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceInfo
+from homeassistant.helpers.entity import Entity
 from homeassistant.loader import async_get_integration
 from .logger import _LOGGER
 from .const import DOMAIN
@@ -27,3 +29,31 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
     return unload_ok
+
+
+class HaierFridgeEntity(Entity):
+    """Base class for Haier Evo Fridge entities."""
+
+    def __init__(self, device) -> None:
+        """Initialize the entity."""
+        self._device = device
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Return device info for this device."""
+        return DeviceInfo(
+            identifiers={(DOMAIN, self._device.unique_id)},
+            name=self._device.device_name,
+            manufacturer="Haier",
+            model=self._device.model_name,
+            sw_version=self._device.sw_version,
+        )
+
+    @property
+    def available(self) -> bool:
+        """Return True if entity is available."""
+        return True
+
+    async def async_update(self) -> None:
+        """Update the entity."""
+        await self._device.update()

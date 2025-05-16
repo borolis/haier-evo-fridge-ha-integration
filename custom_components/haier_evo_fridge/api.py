@@ -380,6 +380,7 @@ class HaierFridge(object):
 
     @property
     def unique_id(self) -> str:
+        """Return unique ID for this device."""
         return f"haier_evo_fridge_{self._device_id}"
 
     # Temperature sensors
@@ -418,11 +419,13 @@ class HaierFridge(object):
     def super_cool_mode(self) -> bool:
         return self._super_cool_mode
 
-    def update(self) -> None:
-        self._haier.auth()
-
     def write_ha_state(self) -> None:
-        pass
+        """Write the state to Home Assistant."""
+        self.hass.async_create_task(self._haier.connect())
+
+    async def update(self) -> None:
+        """Update the device state."""
+        await self.hass.async_add_executor_job(self._get_status)
 
     def on_message(self, message_dict: dict) -> None:
         message_type = message_dict.get("event", "")
