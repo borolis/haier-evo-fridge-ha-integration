@@ -9,6 +9,8 @@ from .logger import _LOGGER
 from .const import DOMAIN
 from . import api
 
+__all__ = ['HaierFridgeEntity']
+
 
 PLATFORMS: list[str] = ["binary_sensor", "number", "sensor", "switch"]
 
