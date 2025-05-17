@@ -249,6 +249,7 @@ class Haier(object):
                     break
             if len(self.devices) > 0:
                 self.connect_in_thread()
+                return
         else:
             _LOGGER.error(f"Failed to get devices, response was: {resp}")
             raise InvalidDevicesList()
